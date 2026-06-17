@@ -1,4 +1,5 @@
 import { createDefaultDocument } from './defaults';
+import { normalizeDocument } from './normalize';
 import type { ProjectDocument } from './types';
 
 /** localStorage key under which the document is persisted. */
@@ -23,7 +24,7 @@ export function deserializeDocument(raw: string | null): ProjectDocument {
   }
 
   if (!isProjectDocument(parsed)) return createDefaultDocument();
-  return parsed;
+  return normalizeDocument(parsed);
 }
 
 function isProjectDocument(value: unknown): value is ProjectDocument {

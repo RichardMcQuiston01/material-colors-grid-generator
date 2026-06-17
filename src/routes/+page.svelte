@@ -1,6 +1,7 @@
 <script lang="ts">
   import CanvasPreview from '$lib/components/CanvasPreview.svelte';
   import ColorEditor from '$lib/components/ColorEditor.svelte';
+  import DocumentActions from '$lib/components/DocumentActions.svelte';
   import FontControls from '$lib/components/FontControls.svelte';
   import StyleControls from '$lib/components/StyleControls.svelte';
 </script>
@@ -15,11 +16,17 @@
 
 <div class="min-h-screen bg-gray-100 text-gray-900">
   <header class="bg-brand-700 text-white">
-    <div class="mx-auto max-w-7xl px-6 py-4">
-      <h1 class="text-xl font-bold">Material Colors Grid Generator</h1>
-      <p class="text-sm text-brand-100">
-        Build a downloadable grid of color swatches for product listings.
-      </p>
+    <div
+      class="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-4 sm:flex-row
+        sm:items-center sm:justify-between"
+    >
+      <div>
+        <h1 class="text-xl font-bold">Material Colors Grid Generator</h1>
+        <p class="text-sm text-brand-100">
+          Build a downloadable grid of color swatches for product listings.
+        </p>
+      </div>
+      <DocumentActions />
     </div>
   </header>
 
