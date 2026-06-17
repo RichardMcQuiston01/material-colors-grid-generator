@@ -3,13 +3,31 @@
   import { drawDocument } from '$lib/renderer';
 
   let canvas = $state<HTMLCanvasElement>();
+  let watermarkImage = $state<HTMLImageElement | null>(null);
 
-  // Repaint whenever the document changes; reading documentStore.current
-  // inside drawDocument registers the reactive dependency.
+  // Load the watermark image whenever its data URL changes; setting the loaded
+  // image triggers the repaint effect below once it is ready to draw.
+  $effect(() => {
+    const url = documentStore.current.style.watermark.dataUrl;
+    if (!url) {
+      watermarkImage = null;
+      return;
+    }
+    const image = new Image();
+    image.onload = () => {
+      watermarkImage = image;
+    };
+    image.src = url;
+  });
+
+  // Repaint whenever the document or the loaded watermark changes; reading
+  // documentStore.current inside drawDocument registers the dependency.
   $effect(() => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    if (ctx) drawDocument(ctx, documentStore.current);
+    if (ctx) {
+      drawDocument(ctx, documentStore.current, undefined, watermarkImage);
+    }
   });
 
   function downloadPng() {

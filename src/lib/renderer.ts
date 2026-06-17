@@ -8,6 +8,7 @@ import {
   type LayoutMetrics,
 } from './layout';
 import { cssSizeToPx } from './units';
+import { watermarkRect } from './watermark';
 import type { BandConfig, ProjectDocument, StyleConfig } from './types';
 
 /** Overall canvas background; ensures exported PNGs are not transparent. */
@@ -22,6 +23,7 @@ export function drawDocument(
   ctx: CanvasRenderingContext2D,
   doc: ProjectDocument,
   metrics: LayoutMetrics = DEFAULT_METRICS,
+  watermarkImage?: HTMLImageElement | null,
 ): void {
   const sections = buildRenderModel(doc.categories);
   const layout = computeLayout(sections, doc.style, metrics);
@@ -54,6 +56,22 @@ export function drawDocument(
       layout.width,
       footerHeight,
     );
+  }
+
+  const watermark = doc.style.watermark;
+  if (watermarkImage && watermark.dataUrl) {
+    const rect = watermarkRect(
+      watermarkImage.naturalWidth,
+      watermarkImage.naturalHeight,
+      layout.width,
+      layout.height,
+      watermark,
+      metrics.padding,
+    );
+    const previousAlpha = ctx.globalAlpha;
+    ctx.globalAlpha = watermark.opacity;
+    ctx.drawImage(watermarkImage, rect.x, rect.y, rect.width, rect.height);
+    ctx.globalAlpha = previousAlpha;
   }
 }
 

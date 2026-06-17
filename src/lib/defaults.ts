@@ -46,6 +46,12 @@ function createDefaultStyle(): StyleConfig {
       background: '#1b5e20',
       font: { family: 'Arial', color: '#ffffff', size: '0.85rem' },
     },
+    watermark: {
+      dataUrl: null,
+      position: 'bottom-right',
+      scale: 0.15,
+      opacity: 1,
+    },
   };
 }
 

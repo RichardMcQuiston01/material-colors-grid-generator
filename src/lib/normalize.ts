@@ -32,6 +32,7 @@ function normalizeStyle(
     },
     header: normalizeBand(s.header, d.header),
     footer: normalizeBand(s.footer, d.footer),
+    watermark: { ...d.watermark, ...(s.watermark ?? {}) },
   };
 }
 

@@ -5,6 +5,7 @@
   import DocumentActions from '$lib/components/DocumentActions.svelte';
   import FontControls from '$lib/components/FontControls.svelte';
   import StyleControls from '$lib/components/StyleControls.svelte';
+  import WatermarkControls from '$lib/components/WatermarkControls.svelte';
 </script>
 
 <svelte:head>
@@ -44,6 +45,9 @@
       </div>
       <div class="rounded-lg bg-white p-5 shadow-sm">
         <BandControls />
+      </div>
+      <div class="rounded-lg bg-white p-5 shadow-sm">
+        <WatermarkControls />
       </div>
     </div>
 

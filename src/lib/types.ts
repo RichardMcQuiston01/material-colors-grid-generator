@@ -61,6 +61,23 @@ export interface BandConfig {
   font: FontConfig;
 }
 
+export type WatermarkPosition =
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right';
+
+/** An optional watermark image placed in a corner of the canvas. */
+export interface WatermarkConfig {
+  /** Data URL of the image, or null when no watermark is set. */
+  dataUrl: string | null;
+  position: WatermarkPosition;
+  /** Width as a fraction of the canvas width (0–1). */
+  scale: number;
+  /** Opacity, 0–1. */
+  opacity: number;
+}
+
 /** All output/appearance settings for the rendered canvas. */
 export interface StyleConfig {
   orientation: Orientation;
@@ -82,6 +99,7 @@ export interface StyleConfig {
   };
   header: BandConfig;
   footer: BandConfig;
+  watermark: WatermarkConfig;
 }
 
 /** The complete persisted document: the color tree plus style settings. */
