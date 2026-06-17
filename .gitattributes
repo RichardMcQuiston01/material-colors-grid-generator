@@ -1,0 +1,12 @@
+# Enforce LF line endings in the working tree to match Prettier's endOfLine: 'lf'.
+# Without this, core.autocrlf=true would check files out as CRLF and Prettier
+# would flag every file. Binary assets are excluded from text normalization.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
