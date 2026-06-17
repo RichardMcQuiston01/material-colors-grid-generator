@@ -35,6 +35,17 @@ function createDefaultStyle(): StyleConfig {
       subCategory: { family: 'Arial', color: '#000000', size: '0.85rem' },
       card: { family: 'Arial', color: 'auto', size: '0.75rem' },
     },
+    // Bands are off by default (empty text); colors apply once text is added.
+    header: {
+      text: '',
+      background: '#1b5e20',
+      font: { family: 'Arial', color: '#ffffff', size: '1.5rem' },
+    },
+    footer: {
+      text: '',
+      background: '#1b5e20',
+      font: { family: 'Arial', color: '#ffffff', size: '0.85rem' },
+    },
   };
 }
 

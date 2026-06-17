@@ -1,4 +1,5 @@
 <script lang="ts">
+  import BandControls from '$lib/components/BandControls.svelte';
   import CanvasPreview from '$lib/components/CanvasPreview.svelte';
   import ColorEditor from '$lib/components/ColorEditor.svelte';
   import DocumentActions from '$lib/components/DocumentActions.svelte';
@@ -40,6 +41,9 @@
       </div>
       <div class="rounded-lg bg-white p-5 shadow-sm">
         <FontControls />
+      </div>
+      <div class="rounded-lg bg-white p-5 shadow-sm">
+        <BandControls />
       </div>
     </div>
 

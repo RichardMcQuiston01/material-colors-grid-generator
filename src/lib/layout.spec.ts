@@ -66,6 +66,24 @@ describe('computeLayout', () => {
     expect(subHeaders[0].text).toBe('Matte');
   });
 
+  test('shifts cards down to make room for a header band', () => {
+    const sections = [section(null, null, [color('A', '#000000')])];
+
+    const baseCard = computeLayout(sections, style()).items.find(
+      (i) => i.type === 'card',
+    );
+    const withBand = computeLayout(sections, {
+      ...style(),
+      header: { ...style().header, text: 'My Colors' },
+    }).items.find((i) => i.type === 'card');
+
+    expect(baseCard?.type).toBe('card');
+    expect(withBand?.type).toBe('card');
+    if (baseCard?.type === 'card' && withBand?.type === 'card') {
+      expect(withBand.y).toBeGreaterThan(baseCard.y);
+    }
+  });
+
   test('emits no header items when headers are null', () => {
     const sections = [section(null, null, [color('A', '#000000')])];
 

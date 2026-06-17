@@ -51,6 +51,16 @@ export interface CardFontConfig {
 
 export type Orientation = 'portrait' | 'landscape';
 
+/**
+ * A full-width text band drawn at the top (header) or bottom (footer) of the
+ * canvas. An empty `text` means the band is not drawn.
+ */
+export interface BandConfig {
+  text: string;
+  background: string;
+  font: FontConfig;
+}
+
 /** All output/appearance settings for the rendered canvas. */
 export interface StyleConfig {
   orientation: Orientation;
@@ -70,6 +80,8 @@ export interface StyleConfig {
     subCategory: FontConfig;
     card: CardFontConfig;
   };
+  header: BandConfig;
+  footer: BandConfig;
 }
 
 /** The complete persisted document: the color tree plus style settings. */

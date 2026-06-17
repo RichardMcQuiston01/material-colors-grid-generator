@@ -1,4 +1,5 @@
-import type { Color, RenderSection, StyleConfig } from './types';
+import { cssSizeToPx } from './units';
+import type { BandConfig, Color, RenderSection, StyleConfig } from './types';
 
 export interface CardBox {
   type: 'card';
@@ -45,9 +46,19 @@ export const DEFAULT_METRICS: LayoutMetrics = {
 };
 
 /**
+ * Pixel height reserved for a header/footer band, or 0 when the band has no
+ * text (and is therefore not drawn).
+ */
+export function bandHeight(band: BandConfig, metrics: LayoutMetrics): number {
+  if (!band.text.trim()) return 0;
+  return cssSizeToPx(band.font.size) + metrics.padding * 1.5;
+}
+
+/**
  * Computes absolute positions for every header and card. Cards flow left to
  * right, wrapping after `style.cardsPerRow`; each section begins on a new row,
- * and a category header is emitted only when the category changes.
+ * and a category header is emitted only when the category changes. Content is
+ * shifted down to clear a header band when one is present.
  */
 export function computeLayout(
   sections: RenderSection[],
@@ -60,7 +71,7 @@ export function computeLayout(
   const cardWidth = (contentWidth - gap * (cardsPerRow - 1)) / cardsPerRow;
 
   const items: LayoutItem[] = [];
-  let y = padding;
+  let y = padding + bandHeight(style.header, metrics);
   let previousCategory: string | null = null;
 
   for (const section of sections) {

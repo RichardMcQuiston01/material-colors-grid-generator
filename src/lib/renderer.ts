@@ -1,13 +1,14 @@
 import { buildRenderModel } from './render-model';
 import {
   DEFAULT_METRICS,
+  bandHeight,
   computeLayout,
   type CardBox,
   type HeaderBox,
   type LayoutMetrics,
 } from './layout';
 import { cssSizeToPx } from './units';
-import type { ProjectDocument, StyleConfig } from './types';
+import type { BandConfig, ProjectDocument, StyleConfig } from './types';
 
 /** Overall canvas background; ensures exported PNGs are not transparent. */
 const CANVAS_BACKGROUND = '#ffffff';
@@ -31,6 +32,11 @@ export function drawDocument(
   ctx.fillStyle = CANVAS_BACKGROUND;
   ctx.fillRect(0, 0, layout.width, layout.height);
 
+  const headerHeight = bandHeight(doc.style.header, metrics);
+  if (headerHeight > 0) {
+    drawBand(ctx, doc.style.header, 0, layout.width, headerHeight);
+  }
+
   for (const item of layout.items) {
     if (item.type === 'header') {
       drawHeader(ctx, item, doc.style);
@@ -38,6 +44,35 @@ export function drawDocument(
       drawCard(ctx, item, doc.style);
     }
   }
+
+  const footerHeight = bandHeight(doc.style.footer, metrics);
+  if (footerHeight > 0) {
+    drawBand(
+      ctx,
+      doc.style.footer,
+      layout.height - footerHeight,
+      layout.width,
+      footerHeight,
+    );
+  }
+}
+
+/** Draws a full-width band (header/footer) with centered text. */
+function drawBand(
+  ctx: CanvasRenderingContext2D,
+  band: BandConfig,
+  y: number,
+  width: number,
+  height: number,
+): void {
+  ctx.fillStyle = band.background;
+  ctx.fillRect(0, y, width, height);
+
+  ctx.font = `bold ${cssSizeToPx(band.font.size)}px ${band.font.family}`;
+  ctx.fillStyle = band.font.color;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(band.text, width / 2, y + height / 2);
 }
 
 function drawHeader(

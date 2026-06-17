@@ -1,5 +1,5 @@
 import { createDefaultDocument } from './defaults';
-import type { ProjectDocument, StyleConfig } from './types';
+import type { BandConfig, ProjectDocument, StyleConfig } from './types';
 
 /**
  * Fills any missing fields of a (possibly older or partial) document from the
@@ -30,5 +30,15 @@ function normalizeStyle(
       subCategory: { ...d.fonts.subCategory, ...(s.fonts?.subCategory ?? {}) },
       card: { ...d.fonts.card, ...(s.fonts?.card ?? {}) },
     },
+    header: normalizeBand(s.header, d.header),
+    footer: normalizeBand(s.footer, d.footer),
   };
+}
+
+function normalizeBand(
+  band: Partial<BandConfig> | undefined,
+  d: BandConfig,
+): BandConfig {
+  const b = band ?? {};
+  return { ...d, ...b, font: { ...d.font, ...(b.font ?? {}) } };
 }
