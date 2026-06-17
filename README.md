@@ -1,42 +1,103 @@
-# sv
+# Material Colors Grid Generator
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A SvelteKit single-page app that renders a grid of color swatches onto an HTML
+canvas and exports it as an image. It is intended for product listings — for
+example, showing the filament colors available for a 3D-printing product,
+grouped by material type (PLA, PETG, and so on).
 
-## Creating a project
+Each color is drawn as a card with a color chip, its hex code, and its name.
+Everything is configurable: canvas size, card appearance, fonts, an optional
+header/footer, and a corner watermark. Your work is saved automatically in the
+browser and can be exported/imported as JSON.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Features
+
+- **Color grid** organized by category and optional sub-category.
+- **Automatic ordering**: categories and sub-categories alphabetical; colors
+  dark to light (`#000000` → `#ffffff`). The sole "Default" category prints no
+  header.
+- **Configurable output**: dimensions, aspect ratio, orientation, cards per
+  row, card background, and card border (rounded corners, thickness, color).
+- **Per-level fonts** for category headers, sub-category headers, and cards.
+  Card font color supports an "Auto" mode that uses each card's own hex value.
+- **Header/footer text** bands with their own background color and font.
+- **Watermark image** placed in any corner, with size and opacity controls.
+- **PNG export** of the rendered canvas.
+- **JSON import/export** to back up or share a color set.
+- **Auto-save** to the browser's `localStorage`.
+
+## Tech stack
+
+- [SvelteKit](https://svelte.dev/docs/kit) (Svelte 5 runes), configured as a
+  static-adapter SPA.
+- [Tailwind CSS](https://tailwindcss.com) v4.
+- [Vitest](https://vitest.dev) for unit tests, ESLint and Prettier for quality.
+- [Bun](https://bun.sh) as the package manager and script runner.
+
+## Getting started
+
+### Prerequisites
+
+- [Bun](https://bun.sh) (used for installing dependencies and running scripts).
+
+### Install
 
 ```sh
-# create a new project
-npx sv create my-app
+bun install
 ```
 
-To recreate this project with the same configuration:
+### Run the dev server
 
 ```sh
-# recreate this project
-bun x sv@0.16.1 create --template minimal --types ts --add eslint vitest="usages:unit" tailwindcss="plugins:none" sveltekit-adapter="adapter:static" --no-download-check --install bun .
+bun run dev
+
+# or open the app in a new browser tab automatically
+bun run dev -- --open
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Build and preview
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun run build     # production build into ./build
+bun run preview   # serve the production build locally
 ```
 
-## Building
+The build uses `@sveltejs/adapter-static` with a `200.html` fallback, so the
+output in `build/` is a static SPA you can host on any static file server.
 
-To create a production version of your app:
+### Quality checks
 
 ```sh
-npm run build
+bun run typecheck   # svelte-check
+bun run test        # run unit tests
+bun run lint        # Prettier check + ESLint
+bun run format      # apply Prettier formatting
 ```
 
-You can preview the production build with `npm run preview`.
+## Usage
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+1. **Add colors.** In the **Colors** panel, rename the default category or add
+   more. Within a category you can add colors directly and/or add
+   sub-categories that each hold their own colors. Every color has a name and a
+   hex value.
+2. **Adjust the output.** Use **Output Style** to set canvas dimensions, aspect
+   ratio, orientation, cards per row, the card background, and the card border.
+3. **Set fonts.** Use **Fonts** to choose the font family, color, and size for
+   category headers, sub-category headers, and cards. Choose **Auto** for the
+   card font color to match each card's own hex value.
+4. **Add a header/footer (optional).** In **Header & Footer**, type text for a
+   band to show it; leave the text empty to hide it. Each band has its own
+   background color and font.
+5. **Add a watermark (optional).** In **Watermark**, upload an image and choose
+   its corner, size, and opacity.
+6. **Export.** The live **Preview** updates as you edit. Click **Download PNG**
+   to save the image.
+7. **Back up or share.** Use **Export JSON** / **Import JSON** in the header to
+   save or load a document. **Reset** returns to a blank document.
+
+Your document is saved in the browser automatically; clearing site data
+removes it, so use **Export JSON** for a durable backup.
+
+## License
+
+Released under the [MIT License](LICENSE.md).
