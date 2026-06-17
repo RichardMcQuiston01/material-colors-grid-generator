@@ -29,3 +29,51 @@ export interface RenderSection {
   subCategoryHeader: string | null;
   colors: Color[];
 }
+
+/** Font settings for a header level (category / sub-category). */
+export interface FontConfig {
+  family: string;
+  /** Hex color for the text. */
+  color: string;
+  /** CSS size as authored, e.g. '1rem'. */
+  size: string;
+}
+
+/**
+ * Font settings for color cards. `color` may be the literal 'auto', which uses
+ * each card's own hex value as its text color.
+ */
+export interface CardFontConfig {
+  family: string;
+  color: 'auto' | string;
+  size: string;
+}
+
+export type Orientation = 'portrait' | 'landscape';
+
+/** All output/appearance settings for the rendered canvas. */
+export interface StyleConfig {
+  orientation: Orientation;
+  /** Aspect ratio label, e.g. '4:3'. */
+  aspectRatio: string;
+  width: number;
+  height: number;
+  cardsPerRow: number;
+  cardBackground: string;
+  border: {
+    rounded: boolean;
+    thickness: string;
+    color: string;
+  };
+  fonts: {
+    category: FontConfig;
+    subCategory: FontConfig;
+    card: CardFontConfig;
+  };
+}
+
+/** The complete persisted document: the color tree plus style settings. */
+export interface ProjectDocument {
+  categories: Category[];
+  style: StyleConfig;
+}

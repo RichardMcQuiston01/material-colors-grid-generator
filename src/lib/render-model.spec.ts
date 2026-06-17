@@ -13,7 +13,10 @@ const category = (
 describe('buildRenderModel', () => {
   test('omits the category header when "Default" is the only category', () => {
     const sections = buildRenderModel([
-      category('Default', [color('White', '#ffffff'), color('Black', '#000000')]),
+      category('Default', [
+        color('White', '#ffffff'),
+        color('Black', '#000000'),
+      ]),
     ]);
 
     expect(sections).toHaveLength(1);
