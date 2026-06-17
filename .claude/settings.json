@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bq query:*)",
+      "Bash(bun run build:*)",
+      "Bash(bun run lint:file:*)",
+      "Bash(bun run test:*)",
+      "Bash(bun run test:file:*)",
+      "Bash(bun run typecheck:*)",
+      "Bash(bun test:*)",
+      "Bash(cc:*)",
+      "Bash(comm:*)",
+      "Bash(find:*)"
+    ]
+  }
+}

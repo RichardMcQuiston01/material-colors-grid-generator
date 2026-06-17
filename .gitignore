@@ -1,18 +1,26 @@
-.idea/
-.vscode/
+node_modules
 
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code personal/local overrides (team config lives in settings.json)
+.claude/settings.local.json
+
+# Env
 .env
-.env.local
-.env.prod
-.env.dist
+.env.*
+!.env.example
+!.env.test
 
-node_modules/
-
-*.log
-
-*.zip
-*.rar
-*.ace
-*.tar.gz
-*.iso
-*.dmg
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

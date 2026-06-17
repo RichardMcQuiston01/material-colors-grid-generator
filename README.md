@@ -1,54 +1,103 @@
-# material-colors-grid-generator
+# Material Colors Grid Generator
 
-# Description
+A SvelteKit single-page app that renders a grid of color swatches onto an HTML
+canvas and exports it as an image. It is intended for product listings — for
+example, showing the filament colors available for a 3D-printing product,
+grouped by material type (PLA, PETG, and so on).
 
-Generate a HTML Canvas element that can be Downloaded or Exported, which has a grid of colors available for a given product. Colors may or may not be grouped together around a common theme(i.e. PLA, PETG, etc.). Each color should have a Card style view with a color chip, hex color code, and color name.
+Each color is drawn as a card with a color chip, its hex code, and its name.
+Everything is configurable: canvas size, card appearance, fonts, an optional
+header/footer, and a corner watermark. Your work is saved automatically in the
+browser and can be exported/imported as JSON.
 
-The outputted file can be used in Product Listings to show off the colors available for a given item.
+## Features
 
-## Overview
+- **Color grid** organized by category and optional sub-category.
+- **Automatic ordering**: categories and sub-categories alphabetical; colors
+  dark to light (`#000000` → `#ffffff`). The sole "Default" category prints no
+  header.
+- **Configurable output**: dimensions, aspect ratio, orientation, cards per
+  row, card background, and card border (rounded corners, thickness, color).
+- **Per-level fonts** for category headers, sub-category headers, and cards.
+  Card font color supports an "Auto" mode that uses each card's own hex value.
+- **Header/footer text** bands with their own background color and font.
+- **Watermark image** placed in any corner, with size and opacity controls.
+- **PNG export** of the rendered canvas.
+- **JSON import/export** to back up or share a color set.
+- **Auto-save** to the browser's `localStorage`.
 
-### Output Style Inputs
+## Tech stack
 
-- Category Font
-  - Font Name(e.g. Arial) [Arial]
-  - Font Color (Black, White, or Custom). [Black]
-  - Font Size(e.g. 1rem) [1rem]
-- Sub-Category Font
-  - Font Name(e.g. Arial) [Arial]
-  - Font Color (Black, White, or Custom). [Black]
-  - Font Size(e.g. 0.85rem) [0.85rem]
-- Card View Font
-  - Font Name(e.g. Arial) [Arial]
-  - Font Color (Black, White, or Auto which uses the Hex color code entered as the font color). [Auto]
-  - Font Size(e.g. 0.75rem) [0.75rem]
-- Output Style
-  - Output Orientation (Portrait or Landscape) [Landscape]
-  - Output Aspect Ration (e.g. 4:3, 16:9) [4:3]
-  - Output Dimensions (User can select from a list of standard dimensions for the aspect ratio selected) [1440x1280]
-- Card View
-  - Cards per Row [5]
-  - Card Background Color(e.g. #f7f7f7) [#f7f7f7]
-  - Border
-    - Rounded Corners(Yes or No) [Yes]
-    - Thickness [0.25rem]
-    - Color [#dddddd]
+- [SvelteKit](https://svelte.dev/docs/kit) (Svelte 5 runes), configured as a
+  static-adapter SPA.
+- [Tailwind CSS](https://tailwindcss.com) v4.
+- [Vitest](https://vitest.dev) for unit tests, ESLint and Prettier for quality.
+- [Bun](https://bun.sh) as the package manager and script runner.
 
-### Color Inputs
+## Getting started
 
-1. User can edit name of Default Category, and/or add additional Categories.
-2. The user can also add Sub-Categories to a Category.
-3. The user can add Colors to a Category or a Sub-Category. For each color, the user should specify a Color Name, and a Color Value using a valid hexadeciaml code.
+### Prerequisites
 
-### User Outputs
+- [Bun](https://bun.sh) (used for installing dependencies and running scripts).
 
-- Iterate through Categories in Alphabetical Order. If the only category is "Default", do not print this category header.
-- Iterate through Sub-Categories in Alphabetical Order(if any)
-- Iterate through Colors in Color Order from Dark to Light(#000000 to #ffffff).
-- Once Cards per Row is reached, wrap to next line.
+### Install
 
-### Tech Stack
+```sh
+bun install
+```
 
-- Single Page Application (SPA)
-- SvelteKit
-- TailwindCSS
+### Run the dev server
+
+```sh
+bun run dev
+
+# or open the app in a new browser tab automatically
+bun run dev -- --open
+```
+
+### Build and preview
+
+```sh
+bun run build     # production build into ./build
+bun run preview   # serve the production build locally
+```
+
+The build uses `@sveltejs/adapter-static` with a `200.html` fallback, so the
+output in `build/` is a static SPA you can host on any static file server.
+
+### Quality checks
+
+```sh
+bun run typecheck   # svelte-check
+bun run test        # run unit tests
+bun run lint        # Prettier check + ESLint
+bun run format      # apply Prettier formatting
+```
+
+## Usage
+
+1. **Add colors.** In the **Colors** panel, rename the default category or add
+   more. Within a category you can add colors directly and/or add
+   sub-categories that each hold their own colors. Every color has a name and a
+   hex value.
+2. **Adjust the output.** Use **Output Style** to set canvas dimensions, aspect
+   ratio, orientation, cards per row, the card background, and the card border.
+3. **Set fonts.** Use **Fonts** to choose the font family, color, and size for
+   category headers, sub-category headers, and cards. Choose **Auto** for the
+   card font color to match each card's own hex value.
+4. **Add a header/footer (optional).** In **Header & Footer**, type text for a
+   band to show it; leave the text empty to hide it. Each band has its own
+   background color and font.
+5. **Add a watermark (optional).** In **Watermark**, upload an image and choose
+   its corner, size, and opacity.
+6. **Export.** The live **Preview** updates as you edit. Click **Download PNG**
+   to save the image.
+7. **Back up or share.** Use **Export JSON** / **Import JSON** in the header to
+   save or load a document. **Reset** returns to a blank document.
+
+Your document is saved in the browser automatically; clearing site data
+removes it, so use **Export JSON** for a durable backup.
+
+## License
+
+Released under the [MIT License](LICENSE.md).

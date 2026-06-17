@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+/*
+ * Brand palette built around dark green. brand-700 (#1b5e20) is the primary
+ * accent; white text on it clears WCAG AA. Lighter steps are for surfaces and
+ * hovers, darker steps for active/pressed states.
+ */
+@theme {
+  --color-brand-50: #e8f5e9;
+  --color-brand-100: #c8e6c9;
+  --color-brand-200: #a5d6a7;
+  --color-brand-300: #81c784;
+  --color-brand-400: #66bb6a;
+  --color-brand-500: #43a047;
+  --color-brand-600: #2e7d32;
+  --color-brand-700: #1b5e20;
+  --color-brand-800: #14501a;
+  --color-brand-900: #0d3b11;
+
+  --font-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+}
