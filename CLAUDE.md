@@ -16,7 +16,7 @@ A SvelteKit SPA that renders a grid of color swatches onto an HTML Canvas elemen
 
 > **Project status:** Core app implemented. SvelteKit (Svelte 5 runes) + TailwindCSS v4 static-adapter SPA (`fallback: '200.html'`, `ssr = false`). Tooling: `bun`, ESLint, Vitest, Prettier (custom `.prettierrc.cjs` + `prettier-plugin-svelte`). Adapter/runes config live in `vite.config.ts` (no `svelte.config.js`).
 >
-> Implemented in `src/lib/`: domain `types`, `ordering` (dark→light), `render-model` (flattening/grouping), `defaults`, `persistence` (localStorage), `factories`, `document.svelte.ts` (runes store), `layout` + `units` + `renderer` (canvas), and `components/` (ColorEditor, StyleControls, FontControls, CanvasPreview). Pure logic is test-driven. Still **planned**: header/footer text, watermark, JSON import/export (see Planned Features).
+> Implemented in `src/lib/`: domain `types`, `ordering` (dark→light), `render-model` (flattening/grouping), `defaults`, `normalize` (back-compat fill), `persistence` (localStorage), `import-export` (JSON), `factories`, `document.svelte.ts` (runes store), `layout` + `units` + `watermark` + `renderer` (canvas), and `components/` (ColorEditor, StyleControls, FontControls, BandControls, WatermarkControls, CanvasPreview, DocumentActions). Pure logic is test-driven. The originally-planned header/footer text, watermark, and JSON import/export are all built.
 
 ## Tech Stack
 
@@ -118,10 +118,10 @@ Font color options are Black / White / Custom for headers; Black / White / **Aut
 - **Color Inputs** — CRUD for categories, sub-categories, and colors.
 - **Preview/Export** — renders canvas; provides download button.
 
-## Planned Features
+## Feature Status
 
-Tracked in the README as not-yet-built:
+All originally-planned features are now implemented:
 
-1. Header and/or footer text with configurable background color and font.
-2. Watermark image placed in a specified corner (top-left, top-right, bottom-left, bottom-right).
-3. JSON export/import of the document for backup and sharing (complements the per-browser localStorage persistence — see [State & Persistence](#state--persistence)).
+1. **Header/footer text** — configurable text, background color, and font per band (`BandConfig`, `BandControls`). Empty text hides the band.
+2. **Watermark** — corner image (data URL) with position, scale, and opacity (`WatermarkConfig`, `WatermarkControls`).
+3. **JSON import/export** — backup/share the document; complements per-browser localStorage (`import-export.ts`, `DocumentActions`). See [State & Persistence](#state--persistence).
