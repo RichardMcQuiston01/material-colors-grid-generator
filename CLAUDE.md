@@ -14,7 +14,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A SvelteKit SPA that renders a grid of color swatches onto an HTML Canvas element, which users can download/export. Intended for use in product listings to display available colors (e.g. filament colors grouped by material type like PLA, PETG).
 
-> **Project status:** Scaffolded with SvelteKit (Svelte 5 runes) + TailwindCSS v4, configured as a static-adapter SPA (`fallback: '200.html'`, `ssr = false` in the root layout). Tooling: `bun`, ESLint, Vitest, Prettier (custom `.prettierrc.cjs` + `prettier-plugin-svelte`). Adapter and runes config live in `vite.config.ts` (no separate `svelte.config.js`). App features below are still to be built.
+> **Project status:** Core app implemented. SvelteKit (Svelte 5 runes) + TailwindCSS v4 static-adapter SPA (`fallback: '200.html'`, `ssr = false`). Tooling: `bun`, ESLint, Vitest, Prettier (custom `.prettierrc.cjs` + `prettier-plugin-svelte`). Adapter/runes config live in `vite.config.ts` (no `svelte.config.js`).
+>
+> Implemented in `src/lib/`: domain `types`, `ordering` (dark→light), `render-model` (flattening/grouping), `defaults`, `persistence` (localStorage), `factories`, `document.svelte.ts` (runes store), `layout` + `units` + `renderer` (canvas), and `components/` (ColorEditor, StyleControls, FontControls, CanvasPreview). Pure logic is test-driven. Still **planned**: header/footer text, watermark, JSON import/export (see Planned Features).
 
 ## Tech Stack
 
