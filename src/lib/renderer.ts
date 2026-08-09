@@ -8,6 +8,7 @@ import {
   type LayoutMetrics,
 } from './layout';
 import { cssSizeToPx } from './units';
+import { resolveAutoTextColor } from './contrast';
 import { watermarkRect } from './watermark';
 import type { BandConfig, ProjectDocument, StyleConfig } from './types';
 
@@ -143,10 +144,14 @@ function drawCard(
   ctx.fillStyle = card.color.hex;
   ctx.fill();
 
-  // Card text: name then hex. 'auto' uses the swatch's own color.
+  // Card text: name then hex. 'auto' uses the swatch's own color, falling back
+  // to a readable color when it would be illegible on the card background.
   const cardFont = style.fonts.card;
   const sizePx = cssSizeToPx(cardFont.size);
-  const textColor = cardFont.color === 'auto' ? card.color.hex : cardFont.color;
+  const textColor =
+    cardFont.color === 'auto'
+      ? resolveAutoTextColor(card.color.hex, style.cardBackground)
+      : cardFont.color;
   const textX = card.x + inset;
   let textY = card.y + inset + chipHeight + sizePx;
 
