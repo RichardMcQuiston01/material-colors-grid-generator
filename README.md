@@ -121,4 +121,4 @@ Released under the [MIT License](LICENSE.md).
 
 ## Copyright
 
-(c)2026 Richard McQuiston.  All Rights Reserved.
+(c)2026 Richard McQuiston. All Rights Reserved.
