@@ -28,7 +28,7 @@
         <input
           type="color"
           bind:value={color.hex}
-          aria-label="{color.name || 'Color'} hex value"
+          aria-label="{color.name.trim() || 'Color'} hex value"
           class="h-8 w-9 shrink-0 rounded border border-gray-300"
         />
         <input
@@ -46,7 +46,7 @@
           type="button"
           onclick={() => colors.splice(i, 1)}
           title="Remove color"
-          aria-label="Remove color {color.name || '(unnamed)'}"
+          aria-label="Remove color {color.name.trim() || '(unnamed)'}"
           class={removeBtnClass}
         >
           ✕
@@ -82,7 +82,7 @@
           onclick={() => doc.categories.splice(ci, 1)}
           disabled={doc.categories.length === 1}
           title="Remove category"
-          aria-label="Remove category {category.name || '(unnamed)'}"
+          aria-label="Remove category {category.name.trim() || '(unnamed)'}"
           class="{removeBtnClass} disabled:cursor-not-allowed
             disabled:opacity-40"
         >
@@ -105,7 +105,8 @@
                 type="button"
                 onclick={() => category.subCategories.splice(si, 1)}
                 title="Remove sub-category"
-                aria-label="Remove sub-category {sub.name || '(unnamed)'}"
+                aria-label="Remove sub-category {sub.name.trim() ||
+                  '(unnamed)'}"
                 class={removeBtnClass}
               >
                 ✕

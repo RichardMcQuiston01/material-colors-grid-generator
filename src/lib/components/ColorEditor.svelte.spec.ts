@@ -98,4 +98,18 @@ describe('ColorEditor', () => {
 
     expect(documentStore.current.categories[0].name).toBe('PLA');
   });
+
+  it('falls back to a meaningful name when a category name is blank or whitespace', async () => {
+    const user = userEvent.setup();
+    render(ColorEditor);
+
+    const name = screen.getByLabelText('Category name');
+    await user.clear(name);
+    await user.type(name, '   ');
+
+    // The remove button's accessible name must not collapse to whitespace.
+    expect(
+      screen.getByLabelText('Remove category (unnamed)'),
+    ).toBeInTheDocument();
+  });
 });
