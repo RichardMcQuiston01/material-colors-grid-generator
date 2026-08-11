@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import ColorEditor from './ColorEditor.svelte';
 import { documentStore } from '$lib/document.svelte';
+import { createDefaultDocument } from '$lib/defaults';
 
 beforeEach(() => {
   documentStore.reset();
@@ -111,5 +112,21 @@ describe('ColorEditor', () => {
     expect(
       screen.getByLabelText('Remove category (unnamed)'),
     ).toBeInTheDocument();
+  });
+
+  it('renders the fallback name without crashing on a non-string imported name', () => {
+    // JSON import does not type-validate the category tree, so a malformed
+    // document can carry a non-string name. Rendering must not throw.
+    const doc = createDefaultDocument();
+    doc.categories[0].colors.push({
+      id: 'c1',
+      name: null as unknown as string,
+      hex: '#ffffff',
+    });
+    documentStore.replace(doc);
+
+    render(ColorEditor);
+
+    expect(screen.getByLabelText('Remove color (unnamed)')).toBeInTheDocument();
   });
 });

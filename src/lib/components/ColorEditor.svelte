@@ -19,6 +19,13 @@
   const removeBtnClass =
     'rounded p-1 text-gray-500 transition-colors hover:bg-red-50 ' +
     'hover:text-red-600 focus-visible:outline-2 focus-visible:outline-red-600';
+
+  // A meaningful accessible name from a possibly-blank name. Guards against
+  // non-string values that an imported JSON document can smuggle past the
+  // parser (the tree contents are not type-validated on import).
+  function accessibleName(name: unknown, fallback: string): string {
+    return (typeof name === 'string' ? name.trim() : '') || fallback;
+  }
 </script>
 
 {#snippet colorList(colors: Color[], context: string)}
@@ -28,7 +35,7 @@
         <input
           type="color"
           bind:value={color.hex}
-          aria-label="{color.name.trim() || 'Color'} hex value"
+          aria-label="{accessibleName(color.name, 'Color')} hex value"
           class="h-8 w-9 shrink-0 rounded border border-gray-300"
         />
         <input
@@ -46,7 +53,7 @@
           type="button"
           onclick={() => colors.splice(i, 1)}
           title="Remove color"
-          aria-label="Remove color {color.name.trim() || '(unnamed)'}"
+          aria-label="Remove color {accessibleName(color.name, '(unnamed)')}"
           class={removeBtnClass}
         >
           ✕
@@ -82,7 +89,10 @@
           onclick={() => doc.categories.splice(ci, 1)}
           disabled={doc.categories.length === 1}
           title="Remove category"
-          aria-label="Remove category {category.name.trim() || '(unnamed)'}"
+          aria-label="Remove category {accessibleName(
+            category.name,
+            '(unnamed)',
+          )}"
           class="{removeBtnClass} disabled:cursor-not-allowed
             disabled:opacity-40"
         >
@@ -105,8 +115,10 @@
                 type="button"
                 onclick={() => category.subCategories.splice(si, 1)}
                 title="Remove sub-category"
-                aria-label="Remove sub-category {sub.name.trim() ||
-                  '(unnamed)'}"
+                aria-label="Remove sub-category {accessibleName(
+                  sub.name,
+                  '(unnamed)',
+                )}"
                 class={removeBtnClass}
               >
                 ✕
