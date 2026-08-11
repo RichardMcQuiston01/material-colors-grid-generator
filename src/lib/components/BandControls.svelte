@@ -45,7 +45,11 @@
                 aria-label="{label} background color"
                 class="h-8 w-10 rounded border border-gray-300"
               />
-              <input bind:value={band.background} class={inputClass} />
+              <input
+                bind:value={band.background}
+                aria-label="{label} background hex value"
+                class={inputClass}
+              />
             </div>
           </label>
           <label>
