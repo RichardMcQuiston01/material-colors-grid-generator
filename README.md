@@ -1,5 +1,7 @@
 # Material Colors Grid Generator
 
+## Overview
+
 A SvelteKit single-page app that renders a grid of color swatches onto an HTML
 canvas and exports it as an image. It is intended for product listings — for
 example, showing the filament colors available for a 3D-printing product,
@@ -9,6 +11,21 @@ Each color is drawn as a card with a color chip, its hex code, and its name.
 Everything is configurable: canvas size, card appearance, fonts, an optional
 header/footer, and a corner watermark. Your work is saved automatically in the
 browser and can be exported/imported as JSON.
+
+## Support
+
+If this library saved you some reverse-engineering, consider [buying me a coffee](https://www.paypal.com/ncp/payment/VDTESHTRR7684). ☕
+
+## Requirements
+
+- A modern browser with JavaScript enabled (current Chrome, Firefox, Edge, or
+  Safari). The app relies on `<canvas>` for rendering, `localStorage` for
+  autosave, and the File API for JSON import/export and watermark image
+  uploads.
+- No account, server, or network connection is required — everything runs
+  client-side in the browser.
+- [Bun](https://bun.sh) 1.x, only if you're running the app locally for
+  development. See [Getting started](#getting-started).
 
 ## Features
 
@@ -101,3 +118,7 @@ removes it, so use **Export JSON** for a durable backup.
 ## License
 
 Released under the [MIT License](LICENSE.md).
+
+## Copyright
+
+(c)2026 Richard McQuiston. All Rights Reserved.
