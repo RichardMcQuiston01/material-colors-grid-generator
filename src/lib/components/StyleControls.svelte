@@ -68,7 +68,11 @@
           aria-label="Card background color"
           class="h-8 w-10 rounded border border-gray-300"
         />
-        <input bind:value={style.cardBackground} class={inputClass} />
+        <input
+          bind:value={style.cardBackground}
+          aria-label="Card background hex value"
+          class={inputClass}
+        />
       </div>
     </label>
   </div>
@@ -100,7 +104,11 @@
               aria-label="Border color"
               class="h-8 w-10 rounded border border-gray-300"
             />
-            <input bind:value={style.border.color} class={inputClass} />
+            <input
+              bind:value={style.border.color}
+              aria-label="Border color hex value"
+              class={inputClass}
+            />
           </div>
         </label>
       </div>
