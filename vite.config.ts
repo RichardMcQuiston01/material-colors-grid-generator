@@ -21,6 +21,18 @@ export default defineConfig({
     projects: [
       {
         extends: './vite.config.ts',
+        // Resolve Svelte's browser build so `mount` is available in jsdom.
+        resolve: { conditions: ['browser'] },
+        test: {
+          name: 'client',
+          environment: 'jsdom',
+          globals: true,
+          include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+          setupFiles: ['./src/vitest-setup-client.ts'],
+        },
+      },
+      {
+        extends: './vite.config.ts',
         test: {
           name: 'server',
           environment: 'node',

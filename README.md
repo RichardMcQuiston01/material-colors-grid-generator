@@ -1,5 +1,7 @@
 # Material Colors Grid Generator
 
+**[Live demo →](https://material-colors-grid-generator.vercel.app)**
+
 ## Overview
 
 A SvelteKit single-page app that renders a grid of color swatches onto an HTML
@@ -14,7 +16,7 @@ browser and can be exported/imported as JSON.
 
 ## Support
 
-If this library saved you some reverse-engineering, consider [buying me a coffee](https://www.paypal.com/ncp/payment/VDTESHTRR7684). ☕
+If this library saved you some reverse-engineering, consider [buying me a coffee](https://donate.stripe.com/00w5kD3Gj1Xo9v7gVOcs800). ☕
 
 ## Requirements
 
@@ -121,4 +123,4 @@ Released under the [MIT License](LICENSE.md).
 
 ## Copyright
 
-(c)2026 Richard McQuiston.  All Rights Reserved.
+(c)2026 Richard McQuiston. All Rights Reserved.

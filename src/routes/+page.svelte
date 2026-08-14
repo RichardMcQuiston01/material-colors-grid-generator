@@ -4,6 +4,7 @@
   import ColorEditor from '$lib/components/ColorEditor.svelte';
   import DocumentActions from '$lib/components/DocumentActions.svelte';
   import FontControls from '$lib/components/FontControls.svelte';
+  import Logo from '$lib/components/Logo.svelte';
   import StyleControls from '$lib/components/StyleControls.svelte';
   import WatermarkControls from '$lib/components/WatermarkControls.svelte';
 </script>
@@ -22,11 +23,14 @@
       class="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-4 sm:flex-row
         sm:items-center sm:justify-between"
     >
-      <div>
-        <h1 class="text-xl font-bold">Material Colors Grid Generator</h1>
-        <p class="text-sm text-brand-100">
-          Build a downloadable grid of color swatches for product listings.
-        </p>
+      <div class="flex items-center gap-3">
+        <Logo class="h-9 w-9 shrink-0 rounded-md shadow-sm" />
+        <div>
+          <h1 class="text-xl font-bold">Material Colors Grid Generator</h1>
+          <p class="text-sm text-brand-100">
+            Build a downloadable grid of color swatches for product listings.
+          </p>
+        </div>
       </div>
       <DocumentActions />
     </div>

@@ -16,7 +16,7 @@ A SvelteKit SPA that renders a grid of color swatches onto an HTML Canvas elemen
 
 > **Project status:** Core app implemented. SvelteKit (Svelte 5 runes) + TailwindCSS v4 static-adapter SPA (`fallback: '200.html'`, `ssr = false`). Tooling: `bun`, ESLint, Vitest, Prettier (custom `.prettierrc.cjs` + `prettier-plugin-svelte`). Adapter/runes config live in `vite.config.ts` (no `svelte.config.js`).
 >
-> Implemented in `src/lib/`: domain `types`, `ordering` (dark→light), `render-model` (flattening/grouping), `defaults`, `normalize` (back-compat fill), `persistence` (localStorage), `import-export` (JSON), `factories`, `document.svelte.ts` (runes store), `layout` + `units` + `watermark` + `renderer` (canvas), and `components/` (ColorEditor, StyleControls, FontControls, BandControls, WatermarkControls, CanvasPreview, DocumentActions). Pure logic is test-driven. The originally-planned header/footer text, watermark, and JSON import/export are all built.
+> Implemented in `src/lib/`: domain `types`, `ordering` (dark→light), `render-model` (flattening/grouping), `defaults`, `normalize` (back-compat fill), `persistence` (localStorage), `import-export` (JSON), `factories`, `document.svelte.ts` (runes store), `layout` + `units` + `watermark` + `renderer` (canvas), and `components/` (ColorEditor, StyleControls, FontControls, BandControls, WatermarkControls, CanvasPreview, DocumentActions). Pure logic is test-driven (Vitest `server` project, node env); interactive components (`ColorEditor`, `DocumentActions`, `BandControls`) have DOM tests via `@testing-library/svelte` (Vitest `client` project, jsdom, `*.svelte.spec.ts`). The originally-planned header/footer text, watermark, and JSON import/export are all built.
 
 ## Tech Stack
 
