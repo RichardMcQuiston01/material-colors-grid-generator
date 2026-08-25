@@ -9,8 +9,8 @@ const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig(
   includeIgnoreFile(gitignorePath),
-  // Tooling buffers, not project source.
-  { ignores: ['.remember/'] },
+  // Tooling buffers and build output, not project source.
+  { ignores: ['.remember/', 'lib/'] },
   js.configs.recommended,
   ts.configs.recommended,
   svelte.configs.recommended,
