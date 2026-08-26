@@ -69,7 +69,7 @@ export { drawDocument } from '../lib/renderer.js';
 export { watermarkRect, type WatermarkRect } from '../lib/watermark.js';
 
 // Serialization: back-compat normalization, JSON import/export, storage keys.
-export { normalizeDocument } from '../lib/normalize.js';
+export { normalizeDocument, type DocumentInput } from '../lib/normalize.js';
 export {
   documentToJson,
   parseImportedDocument,

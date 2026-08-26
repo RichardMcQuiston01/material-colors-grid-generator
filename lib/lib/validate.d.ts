@@ -5,7 +5,13 @@
  * category must be rejected rather than flowing into the renderer.
  */
 import type { Category, Color, ProjectDocument, SubCategory } from './types.js';
-/** True when `value` is a well-formed {@link Color}. */
+/** True when `value` is a supported 3- or 6-digit hex color string. */
+export declare function isHexColor(value: unknown): value is string;
+/**
+ * True when `value` is a well-formed {@link Color}. `hex` must be a real 3- or
+ * 6-digit hex string — an arbitrary string would pass structural validation but
+ * later fail to parse in the colour math.
+ */
 export declare function isColor(value: unknown): value is Color;
 /** True when `value` is a well-formed {@link SubCategory} (with valid colors). */
 export declare function isSubCategory(value: unknown): value is SubCategory;
