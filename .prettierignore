@@ -1,0 +1,8 @@
+# Build output — the compiled package core (committed for git-dependency
+# consumers, but tsc-emitted, not Prettier-formatted). Root-anchored so it
+# never also matches the src/lib source tree.
+/lib
+
+# Generated
+/.svelte-kit
+/build

@@ -1,5 +1,5 @@
-import { createId } from './defaults';
-import type { Category, Color, SubCategory } from './types';
+import { createId } from './defaults.js';
+import type { Category, Color, SubCategory } from './types.js';
 
 export function createColor(name: string, hex: string): Color {
   return { id: createId(), name, hex };

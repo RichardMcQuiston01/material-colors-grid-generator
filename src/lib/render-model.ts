@@ -1,5 +1,5 @@
-import { sortColorsDarkToLight } from './ordering';
-import type { Category, RenderSection } from './types';
+import { sortColorsDarkToLight } from './ordering.js';
+import type { Category, RenderSection } from './types.js';
 
 const byName = <T extends { name: string }>(a: T, b: T): number =>
   a.name.localeCompare(b.name);

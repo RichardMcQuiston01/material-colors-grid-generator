@@ -1,4 +1,4 @@
-import { buildRenderModel } from './render-model';
+import { buildRenderModel } from './render-model.js';
 import {
   DEFAULT_METRICS,
   bandHeight,
@@ -6,11 +6,11 @@ import {
   type CardBox,
   type HeaderBox,
   type LayoutMetrics,
-} from './layout';
-import { cssSizeToPx } from './units';
-import { resolveAutoTextColor } from './contrast';
-import { watermarkRect } from './watermark';
-import type { BandConfig, ProjectDocument, StyleConfig } from './types';
+} from './layout.js';
+import { cssSizeToPx } from './units.js';
+import { resolveAutoTextColor } from './contrast.js';
+import { watermarkRect } from './watermark.js';
+import type { BandConfig, ProjectDocument, StyleConfig } from './types.js';
 
 /** Overall canvas background; ensures exported PNGs are not transparent. */
 const CANVAS_BACKGROUND = '#ffffff';
