@@ -5,8 +5,11 @@
   // and pulls in Svelte types the core does not use.
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    // NodeNext so the emitted package resolves under Node, not only a bundler:
+    // relative specifiers in src carry explicit .js extensions and survive
+    // verbatim into lib/.
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
     "declaration": true,

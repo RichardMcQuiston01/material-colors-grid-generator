@@ -5,7 +5,11 @@
  * greys, yellow on a near-white card).
  */
 export declare const MIN_CARD_TEXT_CONTRAST = 3;
-/** WCAG relative luminance (0–1) of a hex color, with sRGB linearization. */
+/**
+ * WCAG relative luminance (0–1) of a hex color, with sRGB linearization. A
+ * malformed hex is treated as black (0) rather than throwing, so contrast math
+ * stays finite for imported/legacy data.
+ */
 export declare function relativeLuminance(hex: string): number;
 /** WCAG contrast ratio between two hex colors (1–21, order-independent). */
 export declare function contrastRatio(a: string, b: string): number;

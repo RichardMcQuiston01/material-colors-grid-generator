@@ -1,4 +1,4 @@
-import type { BandConfig, Color, RenderSection, StyleConfig } from './types';
+import type { BandConfig, Color, RenderSection, StyleConfig } from './types.js';
 export interface CardBox {
     type: 'card';
     x: number;
@@ -41,6 +41,10 @@ export declare function bandHeight(band: BandConfig, metrics: LayoutMetrics): nu
  * right, wrapping after `style.cardsPerRow`; each section begins on a new row,
  * and a category header is emitted only when the category changes. Content is
  * shifted down to clear a header band when one is present.
+ *
+ * The returned `height` is at least `style.height`, but grows to fit when the
+ * content plus the footer band would otherwise overflow — so cards are never
+ * clipped by the fixed canvas height and the footer never draws over them.
  */
 export declare function computeLayout(sections: RenderSection[], style: StyleConfig, metrics?: LayoutMetrics): Layout;
 //# sourceMappingURL=layout.d.ts.map

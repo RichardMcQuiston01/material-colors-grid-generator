@@ -28,33 +28,33 @@ export type {
   WatermarkConfig,
   StyleConfig,
   ProjectDocument,
-} from '../lib/types';
+} from '../lib/types.js';
 
 // Document construction + defaults.
 export {
   createId,
   DEFAULT_CATEGORY_ID,
   createDefaultDocument,
-} from '../lib/defaults';
+} from '../lib/defaults.js';
 export {
   createColor,
   createCategory,
   createSubCategory,
-} from '../lib/factories';
+} from '../lib/factories.js';
 
 // Ordering + colour math.
-export { luminance, sortColorsDarkToLight } from '../lib/ordering';
+export { luminance, sortColorsDarkToLight } from '../lib/ordering.js';
 export {
   MIN_CARD_TEXT_CONTRAST,
   relativeLuminance,
   contrastRatio,
   readableTextColor,
   resolveAutoTextColor,
-} from '../lib/contrast';
-export { cssSizeToPx } from '../lib/units';
+} from '../lib/contrast.js';
+export { cssSizeToPx } from '../lib/units.js';
 
 // Render pipeline: model → layout → canvas.
-export { buildRenderModel } from '../lib/render-model';
+export { buildRenderModel } from '../lib/render-model.js';
 export {
   DEFAULT_METRICS,
   bandHeight,
@@ -64,19 +64,19 @@ export {
   type LayoutItem,
   type Layout,
   type LayoutMetrics,
-} from '../lib/layout';
-export { drawDocument } from '../lib/renderer';
-export { watermarkRect, type WatermarkRect } from '../lib/watermark';
+} from '../lib/layout.js';
+export { drawDocument } from '../lib/renderer.js';
+export { watermarkRect, type WatermarkRect } from '../lib/watermark.js';
 
 // Serialization: back-compat normalization, JSON import/export, storage keys.
-export { normalizeDocument } from '../lib/normalize';
+export { normalizeDocument } from '../lib/normalize.js';
 export {
   documentToJson,
   parseImportedDocument,
   type ImportResult,
-} from '../lib/import-export';
+} from '../lib/import-export.js';
 export {
   STORAGE_KEY,
   serializeDocument,
   deserializeDocument,
-} from '../lib/persistence';
+} from '../lib/persistence.js';

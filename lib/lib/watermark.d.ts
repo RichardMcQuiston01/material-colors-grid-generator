@@ -1,4 +1,4 @@
-import type { WatermarkConfig } from './types';
+import type { WatermarkConfig } from './types.js';
 export interface WatermarkRect {
     x: number;
     y: number;

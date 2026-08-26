@@ -1,5 +1,5 @@
-import { type LayoutMetrics } from './layout';
-import type { ProjectDocument } from './types';
+import { type LayoutMetrics } from './layout.js';
+import type { ProjectDocument } from './types.js';
 /**
  * Draws a document onto a 2D canvas context. Sizes the canvas to the
  * configured output dimensions, then paints headers and color cards using the

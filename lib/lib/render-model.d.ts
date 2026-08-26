@@ -1,4 +1,4 @@
-import type { Category, RenderSection } from './types';
+import type { Category, RenderSection } from './types.js';
 /**
  * Flattens the category tree into ordered render sections:
  * categories alphabetical → direct colors, then sub-categories alphabetical →

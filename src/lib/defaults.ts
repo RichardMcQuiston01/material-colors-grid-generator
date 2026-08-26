@@ -1,4 +1,4 @@
-import type { Category, ProjectDocument, StyleConfig } from './types';
+import type { Category, ProjectDocument, StyleConfig } from './types.js';
 
 /** Generates a unique id for categories, sub-categories, and colors. */
 export function createId(): string {
