@@ -1,12 +1,20 @@
 import type { ProjectDocument, StyleConfig } from './types.js';
 /**
+ * Recursively-optional version of `T`: every property, at every depth, is
+ * optional. Matches how the normalizer deep-merges input, so a caller can pass
+ * just `{ style: { border: { color } } }` without the sibling fields.
+ */
+export type DeepPartial<T> = {
+    [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
+};
+/**
  * Loose input shape for {@link normalizeDocument}: a possibly older, partial, or
  * untrusted document. `categories` is `unknown` because each entry is validated
- * and filtered; `style` may be any subset of the full config.
+ * and filtered; `style` may be any deeply-partial subset of the full config.
  */
 export interface DocumentInput {
     categories?: unknown;
-    style?: Partial<StyleConfig>;
+    style?: DeepPartial<StyleConfig>;
 }
 /**
  * Fills any missing fields of a (possibly older or partial) document from the
