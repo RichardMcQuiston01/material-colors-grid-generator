@@ -23,7 +23,7 @@ export { buildRenderModel } from '../lib/render-model.js';
 export { DEFAULT_METRICS, bandHeight, computeLayout, type CardBox, type HeaderBox, type LayoutItem, type Layout, type LayoutMetrics, } from '../lib/layout.js';
 export { drawDocument } from '../lib/renderer.js';
 export { watermarkRect, type WatermarkRect } from '../lib/watermark.js';
-export { normalizeDocument } from '../lib/normalize.js';
+export { normalizeDocument, type DocumentInput } from '../lib/normalize.js';
 export { documentToJson, parseImportedDocument, type ImportResult, } from '../lib/import-export.js';
 export { STORAGE_KEY, serializeDocument, deserializeDocument, } from '../lib/persistence.js';
 //# sourceMappingURL=index.d.ts.map

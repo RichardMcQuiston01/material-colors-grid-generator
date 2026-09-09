@@ -5,6 +5,11 @@ on:
     branches: [main, dev]
   pull_request:
 
+# Least privilege: the job only checks out and runs checks, so read-only
+# contents access is all GITHUB_TOKEN needs.
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -34,4 +39,9 @@ jobs:
       - name: Verify committed core build is up to date
         run: |
           bun run build:core
-          git diff --exit-code -- lib
+          # Fail on any change under lib/ — tracked diffs AND untracked files
+          # (a new emitted module missing from the commit).
+          if [[ -n "$(git status --porcelain --untracked-files=all -- lib)" ]]; then
+            git status --short --untracked-files=all -- lib
+            exit 1
+          fi
