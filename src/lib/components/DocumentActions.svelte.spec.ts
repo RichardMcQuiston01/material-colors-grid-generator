@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import DocumentActions from './DocumentActions.svelte';
 import { documentStore } from '$lib/document.svelte';
-import { createDefaultDocument } from '$lib/defaults';
+import { createDefaultDocument } from '@richardmcquiston01/material-colors-grid';
 
 let createObjectURL: ReturnType<typeof vi.fn>;
 let revokeObjectURL: ReturnType<typeof vi.fn>;

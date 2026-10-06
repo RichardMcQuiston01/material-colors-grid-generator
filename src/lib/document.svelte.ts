@@ -1,12 +1,13 @@
 import { browser } from '$app/environment';
-import { buildRenderModel } from './render-model';
 import {
   STORAGE_KEY,
+  buildRenderModel,
+  createDefaultDocument,
   deserializeDocument,
   serializeDocument,
-} from './persistence';
-import { createDefaultDocument } from './defaults';
-import type { ProjectDocument, RenderSection } from './types';
+  type ProjectDocument,
+  type RenderSection,
+} from '@richardmcquiston01/material-colors-grid';
 
 function loadInitial(): ProjectDocument {
   if (!browser) return createDefaultDocument();

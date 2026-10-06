@@ -1,6 +1,6 @@
 <script lang="ts">
   import { documentStore } from '$lib/document.svelte';
-  import type { WatermarkPosition } from '$lib/types';
+  import type { WatermarkPosition } from '@richardmcquiston01/material-colors-grid';
 
   const wm = $derived(documentStore.current.style.watermark);
 
