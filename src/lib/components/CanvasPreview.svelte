@@ -1,6 +1,6 @@
 <script lang="ts">
   import { documentStore } from '$lib/document.svelte';
-  import { drawDocument } from '$lib/renderer';
+  import { drawDocument } from '@richardmcquiston01/material-colors-grid';
 
   let canvas = $state<HTMLCanvasElement>();
   let watermarkImage = $state<HTMLImageElement | null>(null);

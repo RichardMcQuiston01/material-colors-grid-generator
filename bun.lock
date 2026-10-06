@@ -5,6 +5,7 @@
     "": {
       "name": "material-colors-grid-generator",
       "dependencies": {
+        "@richardmcquiston01/material-colors-grid": "^0.1.0",
         "@vercel/analytics": "^2.0.1",
       },
       "devDependencies": {
@@ -109,6 +110,8 @@
     "@oxc-project/types": ["@oxc-project/types@0.133.0", "", {}, "sha512-KzkdCd6Uxqnf6l3HOw1xfatAlUURA0g14cvBYFyJ5SaNOQbOUvBr9PKArcPcrNIeRsBdgcUzOGrhKveVpvOIGA=="],
 
     "@polka/url": ["@polka/url@1.0.0-next.29", "", {}, "sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww=="],
+
+    "@richardmcquiston01/material-colors-grid": ["@richardmcquiston01/material-colors-grid@0.1.0", "", {}, "sha512-/qih5lLD4AxbmofD990LfP2aHisSDKQMm6J8qQ6D7sjyUdj+a7W6SnwndJHXNGFYiKi/L0LsFsevGwGumRuHtg=="],
 
     "@rolldown/binding-android-arm64": ["@rolldown/binding-android-arm64@1.0.3", "", { "os": "android", "cpu": "arm64" }, "sha512-454rs7jHngixp/NMxd5srYD57OnzSlZ/eFTETjORQHLwJG1lRtmNOJcBerZlfu4GjKqeq8aCCIQrMdHyhI51Hw=="],
 

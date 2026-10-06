@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import ColorEditor from './ColorEditor.svelte';
 import { documentStore } from '$lib/document.svelte';
-import { createDefaultDocument } from '$lib/defaults';
+import { createDefaultDocument } from '@richardmcquiston01/material-colors-grid';
 
 beforeEach(() => {
   documentStore.reset();

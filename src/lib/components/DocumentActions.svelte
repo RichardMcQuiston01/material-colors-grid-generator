@@ -1,6 +1,9 @@
 <script lang="ts">
   import { documentStore } from '$lib/document.svelte';
-  import { documentToJson, parseImportedDocument } from '$lib/import-export';
+  import {
+    documentToJson,
+    parseImportedDocument,
+  } from '@richardmcquiston01/material-colors-grid';
 
   let fileInput = $state<HTMLInputElement>();
   let error = $state('');
