@@ -5,7 +5,7 @@
     "": {
       "name": "material-colors-grid-generator",
       "dependencies": {
-        "@richardmcquiston01/material-colors-grid": "^0.1.1",
+        "@richardmcquiston01/material-colors-grid": "^0.2.0",
         "@vercel/analytics": "^2.0.1",
       },
       "devDependencies": {
@@ -111,7 +111,7 @@
 
     "@polka/url": ["@polka/url@1.0.0-next.29", "", {}, "sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww=="],
 
-    "@richardmcquiston01/material-colors-grid": ["@richardmcquiston01/material-colors-grid@0.1.1", "", {}, "sha512-9aYjnVcVURsZOypjfQPxMEjsYmScogsVGtf9Y8fcXqw2j7MRMmoxC1HwchjIO7hRYwqqG/LUj20WbiIldlT4Yw=="],
+    "@richardmcquiston01/material-colors-grid": ["@richardmcquiston01/material-colors-grid@0.2.0", "", {}, "sha512-sSKSw3pOklMqBhn1BqWhu1GF19jHl4hZRHNWRCASejsZnWq4jBmZlEiZA6GmjvR9ZOCsjkURTkuWJqNS/TfsRQ=="],
 
     "@rolldown/binding-android-arm64": ["@rolldown/binding-android-arm64@1.0.3", "", { "os": "android", "cpu": "arm64" }, "sha512-454rs7jHngixp/NMxd5srYD57OnzSlZ/eFTETjORQHLwJG1lRtmNOJcBerZlfu4GjKqeq8aCCIQrMdHyhI51Hw=="],
 
