@@ -1,9 +1,14 @@
 <script lang="ts">
   import { documentStore } from '$lib/document.svelte';
-  import { drawDocument } from '$lib/renderer';
+  import {
+    canvasToBlob,
+    renderToCanvas,
+  } from '@richardmcquiston01/material-colors-grid';
 
   let canvas = $state<HTMLCanvasElement>();
   let watermarkImage = $state<HTMLImageElement | null>(null);
+  let renderError = $state<string | null>(null);
+  let downloadError = $state<string | null>(null);
 
   // Load the watermark image whenever its data URL changes; setting the loaded
   // image triggers the repaint effect below once it is ready to draw.
@@ -21,21 +26,31 @@
   });
 
   // Repaint whenever the document or the loaded watermark changes; reading
-  // documentStore.current inside drawDocument registers the dependency.
+  // documentStore.current inside renderToCanvas registers the dependency.
   $effect(() => {
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      drawDocument(ctx, documentStore.current, undefined, watermarkImage);
-    }
+    const result = renderToCanvas(canvas, documentStore.current, {
+      watermarkImage,
+    });
+    renderError = result.ok ? null : result.error;
   });
 
-  function downloadPng() {
+  async function downloadPng(): Promise<void> {
     if (!canvas) return;
+    const result = await canvasToBlob(canvas, 'image/png');
+    if (!result.ok) {
+      downloadError = result.error;
+      return;
+    }
+    downloadError = null;
+
+    const objectUrl = URL.createObjectURL(result.blob);
     const link = document.createElement('a');
     link.download = 'color-grid.png';
-    link.href = canvas.toDataURL('image/png');
+    link.href = objectUrl;
     link.click();
+    // Give the browser time to start the download before releasing the URL.
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
   }
 </script>
 
@@ -55,6 +70,12 @@
       Download PNG
     </button>
   </div>
+
+  {#if renderError || downloadError}
+    <p role="alert" class="text-sm text-red-700">
+      {renderError ?? downloadError}
+    </p>
+  {/if}
 
   <div class="overflow-auto rounded-lg border border-gray-200 bg-gray-50 p-3">
     <canvas

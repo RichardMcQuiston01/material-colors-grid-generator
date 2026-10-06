@@ -3,22 +3,9 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "main": "./lib/core/index.js",
-  "types": "./lib/core/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./lib/core/index.d.ts",
-      "import": "./lib/core/index.js"
-    }
-  },
-  "files": [
-    "lib",
-    "src"
-  ],
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "build:core": "tsc -p tsconfig.core.json",
     "preview": "vite preview",
     "prepare": "svelte-kit sync || echo ''",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -56,6 +43,7 @@
     "vitest": "^4.1.8"
   },
   "dependencies": {
+    "@richardmcquiston01/material-colors-grid": "^0.2.0",
     "@vercel/analytics": "^2.0.1"
   }
 }

@@ -4,8 +4,8 @@
     createCategory,
     createColor,
     createSubCategory,
-  } from '$lib/factories';
-  import type { Color } from '$lib/types';
+    type Color,
+  } from '@richardmcquiston01/material-colors-grid';
 
   const doc = $derived(documentStore.current);
 

@@ -32,16 +32,3 @@ jobs:
 
       - name: Test
         run: bun run test
-
-      # The package publishes the compiled core from lib/ (committed so
-      # git-dependency consumers need no build step). Fail if it drifts from
-      # src/, which would silently ship stale code to consumers.
-      - name: Verify committed core build is up to date
-        run: |
-          bun run build:core
-          # Fail on any change under lib/ — tracked diffs AND untracked files
-          # (a new emitted module missing from the commit).
-          if [[ -n "$(git status --porcelain --untracked-files=all -- lib)" ]]; then
-            git status --short --untracked-files=all -- lib
-            exit 1
-          fi
