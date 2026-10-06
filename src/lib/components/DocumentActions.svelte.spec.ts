@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen } from '@testing-library/svelte';
+import { render, screen, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import DocumentActions from './DocumentActions.svelte';
 import { documentStore } from '$lib/document.svelte';
@@ -105,5 +105,48 @@ describe('DocumentActions', () => {
     await user.click(screen.getByRole('button', { name: 'Reset' }));
     expect(documentStore.current.categories).toHaveLength(1); // confirmed
     expect(documentStore.current.categories[0].name).toBe('Default');
+  });
+
+  it('puts the help button first, to the left of Export JSON', () => {
+    render(DocumentActions);
+    const buttons = screen.getAllByRole('button');
+
+    expect(buttons[0]).toHaveAccessibleName(
+      'About this package and how to install it',
+    );
+    expect(buttons[1]).toHaveAccessibleName('Export JSON');
+  });
+
+  it('opens the help dialog from the help button', async () => {
+    const user = userEvent.setup();
+    const { container } = render(DocumentActions);
+    const dialog = container.querySelector('dialog') as HTMLDialogElement;
+    // jsdom lacks showModal; the component falls back to the open attribute.
+    HTMLDialogElement.prototype.showModal =
+      undefined as unknown as HTMLDialogElement['showModal'];
+    expect(dialog).not.toHaveAttribute('open');
+
+    await user.click(
+      screen.getByRole('button', {
+        name: 'About this package and how to install it',
+      }),
+    );
+
+    await waitFor(() => expect(dialog).toHaveAttribute('open'));
+  });
+
+  it.each([
+    ['Export JSON', 'download'],
+    ['Import JSON', 'upload'],
+    ['Reset', 'reset'],
+    ['About this package and how to install it', 'help'],
+  ])('shows a decorative icon on the %s button', (name, icon) => {
+    render(DocumentActions);
+    const svg = screen
+      .getByRole('button', { name })
+      .querySelector('svg') as SVGElement;
+
+    expect(svg).toHaveAttribute('data-icon', icon);
+    expect(svg).toHaveAttribute('aria-hidden', 'true');
   });
 });
