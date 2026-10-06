@@ -43,7 +43,7 @@
     "vitest": "^4.1.8"
   },
   "dependencies": {
-    "@richardmcquiston01/material-colors-grid": "^0.1.1",
+    "@richardmcquiston01/material-colors-grid": "^0.2.0",
     "@vercel/analytics": "^2.0.1"
   }
 }
