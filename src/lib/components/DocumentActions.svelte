@@ -1,5 +1,7 @@
 <script lang="ts">
   import { documentStore } from '$lib/document.svelte';
+  import HelpDialog from './HelpDialog.svelte';
+  import Icon from './Icon.svelte';
   import {
     documentToJson,
     parseImportedDocument,
@@ -7,6 +9,7 @@
 
   let fileInput = $state<HTMLInputElement>();
   let error = $state('');
+  let helpOpen = $state(false);
 
   function exportJson() {
     const blob = new Blob([documentToJson(documentStore.current)], {
@@ -42,19 +45,35 @@
   }
 
   const btnClass =
-    'rounded-md border border-white/40 px-3 py-1.5 text-sm font-medium ' +
+    'flex items-center gap-1.5 rounded-md border border-white/40 px-3 py-1.5 ' +
+    'text-sm font-medium ' +
     'text-white transition-colors hover:bg-white/10 focus-visible:outline-2 ' +
     'focus-visible:outline-offset-2 focus-visible:outline-white';
 </script>
 
 <div class="flex flex-wrap items-center gap-2">
+  <button
+    type="button"
+    onclick={() => (helpOpen = true)}
+    aria-label="About this package and how to install it"
+    aria-haspopup="dialog"
+    title="About this package and how to install it"
+    class="{btnClass} px-2"
+  >
+    <Icon name="help" class="h-5 w-5" />
+  </button>
   <button type="button" onclick={exportJson} class={btnClass}>
+    <Icon name="download" />
     Export JSON
   </button>
   <button type="button" onclick={() => fileInput?.click()} class={btnClass}>
+    <Icon name="upload" />
     Import JSON
   </button>
-  <button type="button" onclick={reset} class={btnClass}>Reset</button>
+  <button type="button" onclick={reset} class={btnClass}>
+    <Icon name="reset" />
+    Reset
+  </button>
 
   <input
     bind:this={fileInput}
@@ -66,6 +85,8 @@
     tabindex="-1"
   />
 </div>
+
+<HelpDialog bind:open={helpOpen} />
 
 {#if error}
   <p role="alert" class="mt-2 text-sm text-red-100">
