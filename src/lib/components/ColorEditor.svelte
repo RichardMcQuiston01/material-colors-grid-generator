@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Icon from './Icon.svelte';
   import { documentStore } from '$lib/document.svelte';
   import {
     createCategory,
@@ -15,6 +16,7 @@
   const addBtnClass =
     'rounded-md border border-brand-700 px-3 py-1 text-sm font-medium ' +
     'text-brand-700 transition-colors hover:bg-brand-50 focus-visible:outline-2 ' +
+    'inline-flex items-center gap-1 ' +
     'focus-visible:outline-offset-2 focus-visible:outline-brand-700';
   const removeBtnClass =
     'rounded p-1 text-gray-500 transition-colors hover:bg-red-50 ' +
@@ -56,7 +58,7 @@
           aria-label="Remove color {accessibleName(color.name, '(unnamed)')}"
           class={removeBtnClass}
         >
-          ✕
+          <Icon name="x" />
         </button>
       </li>
     {/each}
@@ -67,7 +69,8 @@
     class="{addBtnClass} mt-2 self-start"
     title="Add a color to {context}"
   >
-    + Add color
+    <Icon name="plus" />
+    Add color
   </button>
 {/snippet}
 
@@ -96,7 +99,7 @@
           class="{removeBtnClass} disabled:cursor-not-allowed
             disabled:opacity-40"
         >
-          ✕
+          <Icon name="x" />
         </button>
       </div>
 
@@ -121,7 +124,7 @@
                 )}"
                 class={removeBtnClass}
               >
-                ✕
+                <Icon name="x" />
               </button>
             </div>
             {@render colorList(sub.colors, sub.name)}
@@ -135,7 +138,8 @@
           class="{addBtnClass} self-start"
           title="Add a sub-category to {category.name}"
         >
-          + Add sub-category
+          <Icon name="plus" />
+          Add sub-category
         </button>
       </div>
     </div>
@@ -147,6 +151,7 @@
     class="{addBtnClass} self-start"
     title="Add a category"
   >
-    + Add category
+    <Icon name="plus" />
+    Add category
   </button>
 </section>

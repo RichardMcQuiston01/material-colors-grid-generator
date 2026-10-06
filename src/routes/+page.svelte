@@ -1,12 +1,25 @@
 <script lang="ts">
+  import AppFooter from '$lib/components/AppFooter.svelte';
+  import AppHeader from '$lib/components/AppHeader.svelte';
   import BandControls from '$lib/components/BandControls.svelte';
   import CanvasPreview from '$lib/components/CanvasPreview.svelte';
   import ColorEditor from '$lib/components/ColorEditor.svelte';
-  import DocumentActions from '$lib/components/DocumentActions.svelte';
   import FontControls from '$lib/components/FontControls.svelte';
-  import Logo from '$lib/components/Logo.svelte';
   import StyleControls from '$lib/components/StyleControls.svelte';
+  import Tabs from '$lib/components/Tabs.svelte';
   import WatermarkControls from '$lib/components/WatermarkControls.svelte';
+
+  type ControlTab = 'colors' | 'style' | 'fonts' | 'bands' | 'watermark';
+
+  const TABS: { id: ControlTab; label: string }[] = [
+    { id: 'colors', label: 'Colors' },
+    { id: 'style', label: 'Output Style' },
+    { id: 'fonts', label: 'Fonts' },
+    { id: 'bands', label: 'Header & Footer' },
+    { id: 'watermark', label: 'Watermark' },
+  ];
+
+  let activeTab = $state<ControlTab>('colors');
 </script>
 
 <svelte:head>
@@ -17,48 +30,44 @@
   />
 </svelte:head>
 
-<div class="min-h-screen bg-gray-100 text-gray-900">
-  <header class="bg-brand-700 text-white">
+<!-- On desktop the app fills the viewport and only the tab panel scrolls (when
+     it has to), so the page itself never scrolls. Below lg the columns stack
+     and the page scrolls normally. -->
+<div
+  class="flex min-h-dvh flex-col bg-gray-100 text-gray-900 lg:h-dvh lg:min-h-0"
+>
+  <AppHeader />
+
+  <main
+    class="mx-auto grid min-h-0 w-full max-w-7xl flex-1 gap-4 px-6 py-4
+      grid-cols-1 lg:grid-cols-2 lg:grid-rows-[minmax(0,1fr)]"
+  >
     <div
-      class="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-4 sm:flex-row
-        sm:items-center sm:justify-between"
+      class="flex min-h-[28rem] flex-col rounded-lg bg-white shadow-sm lg:min-h-0"
     >
-      <div class="flex items-center gap-3">
-        <Logo class="h-9 w-9 shrink-0 rounded-md shadow-sm" />
-        <div>
-          <h1 class="text-xl font-bold">Material Colors Grid Generator</h1>
-          <p class="text-sm text-brand-100">
-            Build a downloadable grid of color swatches for product listings.
-          </p>
-        </div>
-      </div>
-      <DocumentActions />
-    </div>
-  </header>
-
-  <main class="mx-auto grid max-w-7xl gap-6 px-6 py-6 lg:grid-cols-2">
-    <div class="flex flex-col gap-6">
-      <div class="rounded-lg bg-white p-5 shadow-sm">
-        <ColorEditor />
-      </div>
-      <div class="rounded-lg bg-white p-5 shadow-sm">
-        <StyleControls />
-      </div>
-      <div class="rounded-lg bg-white p-5 shadow-sm">
-        <FontControls />
-      </div>
-      <div class="rounded-lg bg-white p-5 shadow-sm">
-        <BandControls />
-      </div>
-      <div class="rounded-lg bg-white p-5 shadow-sm">
-        <WatermarkControls />
-      </div>
+      <Tabs tabs={TABS} label="Settings" bind:active={activeTab}>
+        {#snippet panel(id)}
+          {#if id === 'colors'}
+            <ColorEditor />
+          {:else if id === 'style'}
+            <StyleControls />
+          {:else if id === 'fonts'}
+            <FontControls />
+          {:else if id === 'bands'}
+            <BandControls />
+          {:else}
+            <WatermarkControls />
+          {/if}
+        {/snippet}
+      </Tabs>
     </div>
 
-    <div class="lg:sticky lg:top-6 lg:self-start">
-      <div class="rounded-lg bg-white p-5 shadow-sm">
-        <CanvasPreview />
-      </div>
+    <div
+      class="flex min-h-0 min-w-0 flex-col rounded-lg bg-white p-4 shadow-sm"
+    >
+      <CanvasPreview />
     </div>
   </main>
+
+  <AppFooter />
 </div>
