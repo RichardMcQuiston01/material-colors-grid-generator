@@ -1,5 +1,6 @@
 <script lang="ts">
   import DocumentActions from './DocumentActions.svelte';
+  import DonationBanner from './DonationBanner.svelte';
   import Icon from './Icon.svelte';
   import Logo from './Logo.svelte';
 
@@ -9,10 +10,10 @@
 
 <header class="shrink-0 bg-brand-700 text-white">
   <div
-    class="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-3 sm:flex-row
-      sm:items-center sm:justify-between"
+    class="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-6
+      py-2.5"
   >
-    <div class="flex items-center gap-3">
+    <div class="flex min-w-0 items-center gap-3">
       <Logo class="h-9 w-9 shrink-0 rounded-md shadow-sm" />
       <div>
         <h1 class="text-xl leading-tight font-bold">
@@ -33,6 +34,15 @@
         </a>
       </div>
     </div>
-    <DocumentActions />
+
+    <!-- Takes the open space between the title and the actions; wraps to its
+         own row when the header is too narrow for all three. -->
+    <div class="flex min-w-64 flex-1 basis-64 justify-center">
+      <DonationBanner />
+    </div>
+
+    <div class="max-w-full min-w-0">
+      <DocumentActions />
+    </div>
   </div>
 </header>

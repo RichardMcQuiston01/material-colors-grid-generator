@@ -46,4 +46,30 @@ describe('DonationBanner', () => {
     render(DonationBanner);
     expect(screen.queryByRole('link')).toBeNull();
   });
+
+  it('is an inline card, not a floating overlay', () => {
+    render(DonationBanner);
+    const card = screen.getByRole('complementary', {
+      name: 'Support this project',
+    });
+
+    expect(card).not.toHaveClass('fixed');
+    expect(card).toHaveClass('flex');
+  });
+
+  it('puts the QR code to the left of the message', () => {
+    render(DonationBanner);
+    const qr = screen.getByRole('img', { name: /QR code/i });
+    const message = screen.getByText(/please consider donating/i);
+
+    expect(
+      qr.compareDocumentPosition(message) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it('includes the call to action link text', () => {
+    render(DonationBanner);
+
+    expect(screen.getByText('Donate via Stripe →')).toBeInTheDocument();
+  });
 });
