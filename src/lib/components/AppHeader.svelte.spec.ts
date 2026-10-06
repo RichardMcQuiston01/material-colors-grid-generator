@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/svelte';
+import userEvent from '@testing-library/user-event';
 import AppHeader from './AppHeader.svelte';
 
 const PACKAGE_NAME = '@richardmcquiston01/material-colors-grid';
@@ -42,6 +43,41 @@ describe('AppHeader', () => {
   it('includes the document actions', () => {
     render(AppHeader);
 
+    expect(
+      screen.getByRole('button', { name: 'Export JSON' }),
+    ).toBeInTheDocument();
+  });
+
+  it('places the donation card between the title and the actions', () => {
+    localStorage.clear();
+    render(AppHeader);
+    const heading = screen.getByRole('heading', { level: 1 });
+    const card = screen.getByRole('complementary', {
+      name: 'Support this project',
+    });
+    const exportButton = screen.getByRole('button', { name: 'Export JSON' });
+
+    expect(
+      heading.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      card.compareDocumentPosition(exportButton) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it('lets the donation card be dismissed without affecting the header', async () => {
+    localStorage.clear();
+    const user = userEvent.setup();
+    render(AppHeader);
+
+    await user.click(
+      screen.getByRole('button', { name: /dismiss donation message/i }),
+    );
+
+    expect(
+      screen.queryByRole('complementary', { name: 'Support this project' }),
+    ).toBeNull();
     expect(
       screen.getByRole('button', { name: 'Export JSON' }),
     ).toBeInTheDocument();
