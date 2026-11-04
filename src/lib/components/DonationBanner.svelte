@@ -3,7 +3,7 @@
   import qrCode from '$lib/assets/donate-qr.svg';
   import Icon from './Icon.svelte';
 
-  const DONATE_URL = 'https://donate.stripe.com/00w5kD3Gj1Xo9v7gVOcs800';
+  const DONATE_URL = 'https://ko-fi.com/P1V529Z7ZP';
   const STORAGE_KEY = 'mcgg:donation-dismissed';
 
   const message =
@@ -53,7 +53,7 @@
     >
       <img
         src={qrCode}
-        alt="QR code linking to the Stripe donation page"
+        alt="QR code linking to the Ko-fi donation page"
         width="64"
         height="64"
         class="h-16 w-16 shrink-0 rounded border border-gray-200"
@@ -61,7 +61,7 @@
       <span class="text-xs leading-snug text-gray-700">
         {message}
         <span class="font-medium whitespace-nowrap text-brand-700"
-          >Donate via Stripe →</span
+          >Support on Ko-fi →</span
         >
       </span>
     </a>
