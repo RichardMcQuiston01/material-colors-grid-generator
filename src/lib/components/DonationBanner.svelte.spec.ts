@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import DonationBanner from './DonationBanner.svelte';
 
-const DONATE_URL = 'https://donate.stripe.com/00w5kD3Gj1Xo9v7gVOcs800';
+const DONATE_URL = 'https://ko-fi.com/P1V529Z7ZP';
 const STORAGE_KEY = 'mcgg:donation-dismissed';
 
 beforeEach(() => {
@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 
 describe('DonationBanner', () => {
-  it('links to the Stripe donation page, opening safely in a new tab', () => {
+  it('links to the Ko-fi donation page, opening safely in a new tab', () => {
     render(DonationBanner);
     const link = screen.getByRole('link');
     expect(link).toHaveAttribute('href', DONATE_URL);
@@ -23,7 +23,7 @@ describe('DonationBanner', () => {
     render(DonationBanner);
     expect(
       screen.getByRole('img', {
-        name: /QR code linking to the Stripe donation page/i,
+        name: /QR code linking to the Ko-fi donation page/i,
       }),
     ).toBeInTheDocument();
     expect(screen.getByText(/please consider donating/i)).toBeInTheDocument();
@@ -70,6 +70,6 @@ describe('DonationBanner', () => {
   it('includes the call to action link text', () => {
     render(DonationBanner);
 
-    expect(screen.getByText('Donate via Stripe →')).toBeInTheDocument();
+    expect(screen.getByText('Support on Ko-fi →')).toBeInTheDocument();
   });
 });
